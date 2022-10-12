@@ -1,0 +1,140 @@
+@import 'src/assets/style.scss';
+
+* {
+  font-family: $mainfont;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+table {
+  margin-bottom: 100px;
+  margin-top: 50px
+}
+
+#movie-logo {
+  width: 20%;
+  height: 20%;
+}
+
+.details-table {
+  justify-content: center;
+  display: flex;
+  margin-left: 10%;
+  margin-right: 5%;
+  justify-content: center;
+  display: flex;
+}
+
+.details-name {
+  padding: 5px 15px;
+  color: $color-1;
+}
+
+.movie-content {
+  margin-left: 2%;
+  margin-right: 2%;
+  color: $black;
+}
+
+.colon {
+  padding: 5px 15px;
+}
+
+.movie-heading {
+  color: $black;
+  text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+
+  .header {
+    min-height: 780px;
+    width: 100%;
+    top: -10px;
+    position: relative;
+  }
+
+  .movie-poster-img {
+    display: none;
+  }
+
+  .tr-overview {
+    display: none;
+  }
+
+  .wrapper-watchnow {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .watchnow-btn {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+
+  .header {
+    display: none;
+  }
+
+  .tr-overview {
+    display: contents;
+  }
+
+  .watchnow-btn {
+    display: block;
+  }
+
+  .wrapper-watchnow {
+    display: flex;
+    justify-content: center;
+  }
+
+  .movie-poster-img {
+    display: block;
+    width: 400px;
+    margin: 0.5rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  .movie-poster-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    transition: all 1.5s ease-in-out;
+  }
+
+  .movie-poster-img img:hover {
+    transform: scale(1.35) rotateZ(5deg);
+  }
+}
+
+@media only screen and (max-width:600px) {
+
+  #movie-logo {
+    width: 70%;
+    height: 100%;
+  }
+
+  .movie {
+    width: 500px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    transition: background-color 2s;
+    position: relative;
+    overflow: hidden;
+  }
+}

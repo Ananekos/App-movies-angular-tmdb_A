@@ -1,0 +1,179 @@
+@import 'src/assets/style.scss';
+
+* {
+  font-family: $mainfont;
+}
+
+table {
+  margin: 100px
+}
+
+.overview {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--base-white);
+  padding: 1rem;
+  max-height: 100%;
+  transform: translateY(101%);
+  transition: all 1s ease-in-out;
+}
+
+.tvshow:hover .overview {
+  transform: translateY(0);
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.details-table {
+  margin-left: 10%;
+  margin-right: 5%;
+  justify-content: center;
+  display: flex;
+}
+
+.details-name {
+  padding: 5px 15px;
+  color: $color-1;
+
+}
+
+.colon {
+  padding: 5px 15px;
+}
+
+.details-value {
+  padding: 5px 15px;
+}
+
+.tvshow-heading {
+  display: block;
+  text-transform: uppercase;
+  color: $black;
+  text-align: center;
+}
+
+#tvshow-logo {
+  width: 20%;
+  height: 20%;
+}
+
+@media only screen and (min-width: 600px) {
+  .header {
+    min-height: 780px;
+    width: 100%;
+    top: -10px;
+    position: relative;
+  }
+
+  .tvshow-info {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .tvshow-info span {
+    margin-left: 5px;
+  }
+
+  .tvshow-info i {
+    color: rgb(85, 82, 82);
+    background-color: var(--dark-red);
+    font-size: 1rem;
+  }
+
+  .tvshow-poster-img {
+    display: none;
+  }
+
+  .tr-overview {
+    display: none;
+  }
+
+  .wrapper-watchnow {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .watchnow-btn {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+
+
+  .header {
+    display: none;
+  }
+
+
+  .tr-overview {
+    display: contents;
+  }
+
+  .watchnow-btn {
+    display: block;
+  }
+
+  .wrapper-watchnow {
+    display: flex;
+    justify-content: center;
+  }
+
+  .tvshow-poster-img {
+    display: block;
+    width: 400px;
+    margin: 0.5rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  .tvshow-poster-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    transition: all 1.5s ease-in-out;
+  }
+
+  .tvshow-poster-img img:hover {
+    transform: scale(1.35) rotateZ(5deg);
+  }
+
+}
+
+@media only screen and (max-width:600px) {
+
+  #tvshow-logo {
+    width: 70%;
+    height: 100%;
+  }
+
+  .tvshow {
+    width: 500px;
+    margin: 1rem;
+    border-radius: 3px;
+    box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tvshow-info h4 {
+    margin-top: 0;
+    width: 80%;
+    font-size: 30px;
+  }
+}

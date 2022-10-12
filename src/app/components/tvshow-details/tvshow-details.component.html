@@ -1,0 +1,85 @@
+<div class="tvshow-details">
+
+
+  <section class="header">
+    <app-header [data]="tvshowDetails"></app-header>
+  </section>
+
+
+  <main id="main">
+    <div class="tvshow-poster-img">
+      <div *ngIf="tvshowDetails.poster_path==null; then NoImg else Img"></div>
+      <ng-template #NoImg><img src="assets/images/no-image.png" class="no-image"></ng-template>
+      <ng-template #Img><img [attr.src]="highqualityImgUrl+tvshowDetails.poster_path"></ng-template>
+    </div>
+  </main>
+
+
+  <div class="text-center mt-5" *ngIf="tvshowDetails.logoList!=null">
+    <img id="tvshow-logo" src="{{imgUrl+tvshowDetails.logoList.file_path}}">
+  </div>
+
+  
+  <h1 class="tvshow-heading mt-5">More About ({{tvshowDetails.original_title}})</h1>
+  <div class="tvshow-content">
+    <table class="details-table">
+      <tbody>
+        <tr>
+          <td class="details-name">Original Name</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.original_title}}</td>
+        </tr>
+        <tr>
+          <td class="details-name">First Air Date</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.first_air_date | date}}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Status</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.status}}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Episode Run times</td>
+          <td class="colon"> | </td>
+          <td class="details-value">
+            <span *ngFor="let avg of tvshowDetails.episode_run_time;let i=index" class="pl-2">
+              {{avg+"min "}}
+              <span *ngIf='tvshowDetails.episode_run_time.length != i+1'> , </span>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Rating</td>
+          <td class="colon"> | </td>
+          <td class="details-value"> {{'( '+tvshowDetails.vote_average+' / 10 )'}}
+            <ngb-rating [max]="10" [(rate)]="tvshowDetails.vote_average" [readonly]="true"></ngb-rating>
+          </td>
+        </tr>
+        <tr>
+          <td class="details-name">Original Language</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.original_lan}}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Last Air Date</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.last_air_date | date}}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Number of Episodes</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.no_of_episodes}}</td>
+        </tr>
+        <tr>
+          <td class="details-name">Number of Season</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.no_of_seasons}}</td>
+        </tr>
+        <tr class="tr-overview">
+          <td class="details-name">Overview</td>
+          <td class="colon"> | </td>
+          <td class="details-value">{{tvshowDetails.overview}}</td>
+        </tr>
+      </tbody>
+    </table>

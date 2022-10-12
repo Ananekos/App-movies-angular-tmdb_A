@@ -1,0 +1,43 @@
+@import 'src/assets/style.scss';
+
+* {
+  font-family: $mainfont;
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  background: linear-gradient(to right, $color-2, $color-1, );
+  transition: background-color 2s;
+  height: 100px;
+}
+
+.navbar-brand {
+  font-family: $logofont;
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  margin-left: 20px;
+
+}
+
+.navbar-slogan {
+  font-size: 1.3rem;
+  margin-left: 20px;
+  color: white;
+  margin-left: 100px;
+
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+@media only screen and (max-width:600px) {
+  .footer .container-fluid {
+    width: 100%;
+    color: var(--base-white);
+    margin-left: 0%;
+  }
+}
+

@@ -1,0 +1,93 @@
+<div class="movies-section">
+
+  <nav class="navbar navbar-expand">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color:#fff" role="button" data-bs-toggle="dropdown">
+              Filter
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item link text-secondary" (click)="getOrderContent('','')">Clear filter</a></li>
+              <li *ngFor="let order of orderList"><a class="dropdown-item link"
+                  (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
+            </ul>
+          </li>
+
+
+        </ul>
+        <div class="lg-search">
+          <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+            <input type="text" placeholder="Search Movie" formControlName="movieName" class="search form-control"
+              (keyup)="findMovies()" [(ngModel)]="findthismovie">
+          </form>
+          <div class="search-list" id="search-list-lg">
+            <div class="search-list-item" *ngFor="let s of searchList" [routerLink]="['/moviedetails',s.id]">
+              <div class="search-item-thumbnail">
+                <p *ngIf="s.poster_path==null;then thenBlock else elseBlock"></p>
+                <ng-template #thenBlock>
+                  <img src="assets/images/no-image.png">
+                </ng-template>
+                <ng-template #elseBlock>
+                  <img src="{{imgUrl+s.poster_path}}">
+                </ng-template>
+              </div>
+              <div class="search-item-info">
+                <h3>{{s.title}}
+                </h3>
+                <p><span class="search-date"> {{s.release_date | date}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="sm-search">
+    <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+      <input type="text" placeholder="Search Movie" formControlName="movieName" class="search form-control"
+        (keyup)="findMovies()" [(ngModel)]="findthismovie">
+    </form>
+    <div class="search-list" id="search-list-sm">
+      <div class="search-list-item" *ngFor="let s of searchList" [routerLink]="['/moviedetails',s.id]">
+        <div class="search-item-thumbnail">
+          <p *ngIf="s.poster_path==null;then thenBlock else elseBlock"></p>
+          <ng-template #thenBlock>
+            <img src="assets/images/no-image.png">
+          </ng-template>
+          <ng-template #elseBlock>
+            <img src="{{imgUrl+s.poster_path}}">
+          </ng-template>
+        </div>
+        <div class="search-item-info">
+          <h3>{{s.title}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <h1 class="section-title">{{sortby_value | uppercase}}</h1>
+
+
+  <main id="main">
+    <div class="movie" id="movie" *ngFor="let movie of movieList" [routerLink]="['/moviedetails',movie.id]">
+      <app-card [data]="movie"></app-card>
+    </div>
+  </main>
+
+
+  <div class="pagination" *ngIf="movieList.length>0">
+    <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
+    <button class="btn" id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
+    <button class="btn" id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
+  </div>
+  <div *ngIf="movieList.length<=0">
+    <h1 class="text-warning text-center">No Movies Found</h1>
+  </div>
+</div>

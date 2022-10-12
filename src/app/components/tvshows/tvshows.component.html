@@ -1,0 +1,93 @@
+<div class="tvshows-section">
+
+  <nav class="navbar navbar-expand navbar-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav me-auto">
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color:#fff" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Filter
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item link text-secondary" (click)="getOrderContent('','')">Clear Filter</a></li>
+              <li *ngFor="let order of orderList"><a class="dropdown-item link"
+                  (click)="getOrderContent(order.order,order.desc)">{{order.desc}}</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+        <div class="lg-search">
+          <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+            <input type="text" placeholder="Search Tvshow" formControlName="tvshowName" class="search form-control"
+              (keyup)="findTvshow()" [(ngModel)]="findthistvshow">
+          </form>
+          <div class="search-list" id="search-list-lg">
+            <div class="search-list-item" *ngFor="let s of searchList" [routerLink]="['/tvshowdetails',s.id]">
+              <div class="search-item-thumbnail">
+                <p *ngIf="s.poster_path==null;then thenBlock else elseBlock"></p>
+                <ng-template #thenBlock>
+                  <img src="assets/images/no-image.png">
+                </ng-template>
+                <ng-template #elseBlock>
+                  <img src="{{imgUrl+s.poster_path}}">
+                </ng-template>
+              </div>
+              <div class="search-item-info">
+                <h3>{{s.name}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="sm-search">
+    <form id="form" [formGroup]="searchForm" (ngSubmit)="getSearchContent()">
+      <input type="text" placeholder="Search Tvshow" formControlName="tvshowName" class="search form-control"
+        (keyup)="findTvshow()" [(ngModel)]="findthistvshow">
+    </form>
+    <div class="search-list" id="search-list-sm">
+      <div class="search-list-item" *ngFor="let s of searchList" [routerLink]="['/tvshowdetails',s.id]">
+        <div class="search-item-thumbnail">
+          <p *ngIf="s.poster_path==null;then thenBlock else elseBlock"></p>
+          <ng-template #thenBlock>
+            <img src="assets/images/no-image.png">
+          </ng-template>
+          <ng-template #elseBlock>
+            <img src="{{imgUrl+s.poster_path}}">
+          </ng-template>
+        </div>
+        <div class="search-item-info">
+          <h3>{{s.name}}</h3>
+          <p><span class="search-date"> {{s.first_air_date | date}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <h1 class="section-title">{{sortby_value | uppercase}}</h1>
+
+
+  <main id="main">
+    <div class="tvshow" id="tvshow" *ngFor="let tvshow of tvshowList" [routerLink]="['/tvshowdetails',tvshow.id]">
+      <app-card [data]="tvshow"></app-card>
+    </div>
+  </main>
+
+  
+  <div class="pagination" id="pagination" *ngIf="tvshowList.length>0">
+    <button class="btn" id="prev" [disabled]="isdisableprev" (click)="handlePagination(2)">Prev</button>
+    <button class="btn" id="home" (click)="handlePagination(1)" style="border-radius: 100%;">{{page_no}}</button>
+    <button class="btn" id="next" [disabled]="isdisablenext" (click)="handlePagination(3)">Next</button>
+  </div>
+  <div *ngIf="tvshowList.length<=0">
+    <h1 class="text-warning text-center">No Tvshows Found</h1>
+  </div>
+</div>

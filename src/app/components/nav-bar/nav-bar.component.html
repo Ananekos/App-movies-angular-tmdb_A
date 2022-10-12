@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-dark">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <a class="navbar-brand" href="">
+        POPFLIX
+      </a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/movies" routerLinkActive="active">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/tvshows" routerLinkActive="active">TV Shows</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="main-content">
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>
