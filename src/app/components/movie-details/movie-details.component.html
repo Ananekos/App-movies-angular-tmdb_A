@@ -27,12 +27,12 @@
               <tr>
                   <td class="details-name">Original Name</td>
                   <td  class="colon"> | </td>
-                  <td class="details-value">{{movieDetails.original_title}}</td>
+                  <td  class="details-value">{{movieDetails.original_title}}</td>
               </tr>
               <tr>
                   <td class="details-name">Release Date</td>
                   <td class="colon"> | </td>
-                  <td class="details-value">{{movieDetails.release_date | date}}</td>
+                  <td *ngIf="movieDetails.release_date!=''" class="details-value">{{movieDetails.release_date | date}}</td>
               </tr>
               <tr>
                   <td class="details-name">Status</td>
@@ -42,12 +42,12 @@
               <tr>
                   <td class="details-name">Run Time</td>
                   <td class="colon"> | </td>
-                  <td class="details-value">{{movieDetails.runtime+" min"}}</td>
+                  <td *ngIf="movieDetails.runtime!=null"  class="details-value">{{movieDetails.runtime+" min"}}</td>
               </tr>
-              <tr>
+              <tr *ngIf="movieDetails.vote_average != null">
                   <td class="details-name">Rating</td>
                   <td  class="colon"> | </td>
-                  <td class="details-value" > {{'( '+movieDetails.vote_average+' / 10 )'}}
+                  <td  class="details-value" > {{'( '+movieDetails.vote_average+' / 10 )'}}
                       <ngb-rating [max]="10" [(rate)]="movieDetails.vote_average" [readonly]="true"></ngb-rating>
                   </td>
               </tr>
@@ -56,12 +56,12 @@
                   <td class="colon"> | </td>
                   <td class="details-value">{{movieDetails.original_lan}}</td>
               </tr>
-              <tr class="tr-overview">
+              <tr *ngIf="movieDetails.overview != null" class="tr-overview">
                   <td class="details-name">OverView</td>
                   <td class="colon"> | </td>
                   <td class="details-value movie-description">{{movieDetails.overview}}</td>
               </tr>
-              <tr>
+              <tr *ngIf="movieDetails.production_companies?.length != 0">
                   <td class="details-name">Production</td>
                   <td class="colon"> | </td>
                   <td class="details-value">
@@ -71,13 +71,13 @@
                       </span>
                   </td>
               </tr>
-              <tr>
+              <tr *ngIf='movieDetails.genre?.length != 0'>
                   <td class="details-name">Genres</td>
                   <td class="colon"> | </td>
                   <td class="details-value">
                       <span *ngFor="let genre of movieDetails.genre;let i=index;">
                           {{genre.name}}
-                          <span *ngIf='movieDetails.genre.length != i+1'> , </span>
+                          <span *ngIf='movieDetails.genre.length!=i+1'> , </span>
                       </span>
                   </td>
               </tr>

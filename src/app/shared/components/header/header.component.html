@@ -1,4 +1,4 @@
-<div class="header-bg" [style.backgroundImage]="'url('+data.background_image+')'">
+<div class="header-bg" *ngIf="data.background_image != null" [style.backgroundImage]="'url('+data.background_image+')'">
 </div>
 
 <div class="header-content">
@@ -26,19 +26,19 @@
             <i class="far fa-star"></i>
             <span>{{data.vote_average}}</span>
           </div>
-          <div class="header-info">
+          <div class="header-info" >
             <i class="fas fa-clock"></i>
-            <span *ngIf="data.runtime">{{data.runtime + ' min'}}</span>
-            <span *ngIf="data.avg_run_time">{{data.avg_run_time + ' min'}}</span>
+            <span *ngIf="data.runtime != null">{{data.runtime + ' min'}}</span>
+            <span *ngIf="data.avg_run_time != null">{{data.avg_run_time + ' min'}}</span>
           </div>
           <div class="header-info">
             <i class="fas fa-calendar"></i>
-            <span *ngIf="data.release_date">{{data.release_date | date}}</span>
-            <span *ngIf="data.first_air_date">{{data.first_air_date | date}}</span>
+            <span *ngIf="data.release_date != null">{{data.release_date | date}}</span>
+            <span *ngIf="data.first_air_date != null">{{data.first_air_date | date}}</span>
           </div>
         </div>
         
-        <div class="item-overview">
+        <div class="item-overview" *ngIf="data.overview != null" >
           {{data.overview}}
         </div>
       </div>

@@ -38,7 +38,6 @@ export class MovieDetailsComponent implements OnInit {
 
     let api_url=myAppConfig.tmdb.movieBaseUrl+'/movie/'+id+'?'+myAppConfig.tmdb.apikey;
     this.getMovieDetailsData(api_url);
-
     
     let backdrop_url=myAppConfig.tmdb.movieBaseUrl+"/movie/"+movie_id+"/images?"+myAppConfig.tmdb.apikey;
     this.getMovieImages(backdrop_url)
@@ -51,7 +50,8 @@ export class MovieDetailsComponent implements OnInit {
     let watch:any;
     this.movieservice.watchData.subscribe((data)=>{
       watch=data;
-      this.movieDetails.watchprovider=watch.results.IN[0]?.link;
+      if(watch.results && watch.results.IN && watch.results.IN[0] != null){
+      this.movieDetails.watchprovider = watch.results?.IN[0]?.link;}
     })
   }
 
@@ -117,5 +117,6 @@ export class MovieDetailsComponent implements OnInit {
         this.movieDetails.watchprovider=tempMovieDetails.homepage;
       }
     })
+    console.log('detalles', this.movieDetails);
   }
 }

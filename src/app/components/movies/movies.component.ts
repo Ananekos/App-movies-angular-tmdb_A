@@ -45,7 +45,7 @@ export class MoviesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getGenre()
+    this.getGenres()
     this.getOrder()
     this.getMovies()
     this.getCountries()
@@ -58,6 +58,16 @@ export class MoviesComponent implements OnInit {
       this.countryList=data;
     })
   }
+
+  getGenres () {
+    var genre_url=myAppConfig.tmdb.movieBaseUrl+"/genre/movie/list?"+myAppConfig.tmdb.apikey;
+    this.movieservice.getGenreList(genre_url);
+    this.movieservice.genreData.subscribe((data)=>{
+      this.genreList=data;
+    })
+  }
+  
+  
 
   searchList:any=[];
   findthismovie:string='';
@@ -96,11 +106,11 @@ export class MoviesComponent implements OnInit {
     })
   }
 
-  getGenre() {
-    this.movieservice.getGenreList().subscribe((data)=>{
-      this.genreList=data;
-    })
-  }
+  // getGenre() {
+  //   this.movieservice.getGenreList().subscribe((data)=>{
+  //     this.genreList=data;
+  //   })
+  // }
 
   getMovies(){
       page=1;

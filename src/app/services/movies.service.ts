@@ -7,7 +7,7 @@ import { map, Observable, of, Subject } from 'rxjs';
 })
 export class MoviesService {
 
-  genre:Observable<any[]> = of([{id:28,name:'Action'},{id:12,name:'Adventures'},{id:16,name:'Animation'},{id:35,name:'Comedy'},{id:80,name:'Crime'},{id:99,name:'Documentary'},{id:18,name:'Drama'},{id:10751,name:'Family'},{id:14,name:'Fantacy'},{id:36,name:'History'},{id:27,name:'Horror'},{id:10402,name:'Music'},{id:9648,name:'Mystery'},{id:10749,name:'Romance'},{id:878,name:'Science Fiction'},{id:10770,name:'Tv'},{id:53,name:'Thriller'},{id:10752,name:'War'},{id:37,name:'Western'},]);
+  //genre:Observable<any[]> = of([{id:28,name:'Action'},{id:12,name:'Adventures'},{id:16,name:'Animation'},{id:35,name:'Comedy'},{id:80,name:'Crime'},{id:99,name:'Documentary'},{id:18,name:'Drama'},{id:10751,name:'Family'},{id:14,name:'Fantacy'},{id:36,name:'History'},{id:27,name:'Horror'},{id:10402,name:'Music'},{id:9648,name:'Mystery'},{id:10749,name:'Romance'},{id:878,name:'Science Fiction'},{id:10770,name:'Tv'},{id:53,name:'Thriller'},{id:10752,name:'War'},{id:37,name:'Western'},]);
   sortBy:Observable<any[]> = of([{order:'upcoming.desc',desc:'Upcoming'},{order:'nowplaying.desc',desc:'Now Playing'},{  order:'popularity.desc',  desc:'Trending Now'},{  order:'popularity.asc',  desc:'Old Low trend'},{  order:'vote_average.desc',  desc:'Top Rated'},{  order:'vote_average.asc',  desc:'Low Rated'},{  order:'release_date.desc',  desc:'Release Date Des'},{  order:'release_date.asc',  desc:'Release Date Asc'},{  order:'original_title.desc',  desc:'Z To A'},{  order:'original_title.asc',  desc:'A To Z'},{  order:'revenue.desc',  desc:'Top Grossing'},{  order:'revenue.asc',  desc:'Low Grossing'}])
   //Movies List
   private movieSource = new Subject();
@@ -57,6 +57,10 @@ export class MoviesService {
   private countrySource=new Subject();
   countryData=this.countrySource.asObservable();
 
+  //Genre providers
+  private genreSource=new Subject();
+  genreData=this.countrySource.asObservable();
+
 
 
   constructor(private http:HttpClient) {}
@@ -70,8 +74,12 @@ export class MoviesService {
   }
 
 
-  getGenreList():Observable<any[]>{
-    return this.genre;
+  getGenreList(url:any){
+    let genre:any;
+    this.http.get(url).subscribe((res)=>{
+      genre=res;
+      this.genreSource.next(genre);
+    })
   }
 
   getOrderList():Observable<any[]>{
